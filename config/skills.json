@@ -1,0 +1,38 @@
+{
+    "technical": [
+        "python",
+        "sql",
+        "excel",
+        "power bi",
+        "tableau",
+        "java",
+        "javascript",
+        "html",
+        "css",
+        "react",
+        "node.js",
+        "aws",
+        "azure",
+        "machine learning",
+        "data analysis",
+        "data science",
+        "mongodb",
+        "mysql",
+        "postgresql",
+        "oracle",
+        "etl",
+        "api",
+        "git"
+    ],
+
+    "soft": [
+        "communication",
+        "teamwork",
+        "leadership",
+        "problem solving",
+        "time management",
+        "english",
+        "customer service",
+        "negotiation"
+    ]
+}
