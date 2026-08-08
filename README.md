@@ -88,7 +88,7 @@ flowchart LR
 
 ```bash
 git clone https://github.com/Thunnpoe/myanmar-job-market-intelligence.git
-cd Myanmar-Job-Market-Analysis-System
+cd myanmar-job-market-intelligence
 python -m venv .venv
 ```
 
