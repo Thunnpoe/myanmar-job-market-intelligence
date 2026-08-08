@@ -2,4 +2,23 @@
 .env
 __pycache__/
 *.pyc
-data/raw/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local data and exports
+data/*.json
+data/*.jsonl
+data/*.csv
+data/*.parquet
+data/*.xlsx
+
+# Runtime output
+*.log
+logs/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
