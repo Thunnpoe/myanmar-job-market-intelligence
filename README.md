@@ -87,7 +87,7 @@ flowchart LR
 ### 2. Clone and create an environment
 
 ```bash
-git clone https://github.com/Thunnpoe/Myanmar-Job-Market-Analysis-System.git
+git clone https://github.com/Thunnpoe/myanmar-job-market-intelligence.git
 cd Myanmar-Job-Market-Analysis-System
 python -m venv .venv
 ```
