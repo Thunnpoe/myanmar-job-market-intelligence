@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Live Myanmar job-market intelligence and career tools.">
+  <title>Myanmar Job Pulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script><script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#overview"><span class="brand-mark">MM</span><span><strong>Myanmar Job Pulse</strong><small>Market intelligence</small></span></a>
+    <form class="global-search" id="globalSearchForm" role="search"><input id="globalSearchInput" aria-label="Search jobs" autocomplete="off" placeholder="Search jobs, skills or companies"><button type="submit" aria-label="Search">Search</button></form>
+    <nav class="topnav" aria-label="Main navigation">
+      <a href="#overview">Overview</a><a href="#recommendations">Recommendations</a><a href="#skill-gap">Skill gap</a><a href="#career-tools">Career tools</a>
+    </nav>
+    <div class="live-status"><span></span><b>Live</b></div>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch theme">Moon</button>
+    <button class="mobile-filter-button" id="mobileFilterButton" type="button" aria-label="Open filters">Filters</button>
+  </header>
+
+  <section class="search-drawer" id="searchDrawer" aria-live="polite" hidden><div class="search-drawer-head"><div><small>Search results</small><strong id="searchResultTitle">Matching jobs</strong></div><button id="closeSearch" type="button" aria-label="Close search results">×</button></div><div class="result-grid" id="searchResults"></div></section>
+
+  <aside class="filter-sidebar" id="filterSidebar">
+    <div class="filter-heading"><div><small>Explore</small><strong>Market filters</strong></div><button id="collapseFilters" type="button" aria-label="Minimize filters">‹</button></div>
+    <div class="filter-content">
+      <label>Industry<select id="industryFilter"><option value="">All industries</option></select></label>
+      <label>City<select id="cityFilter"><option value="">All cities</option></select></label>
+      <button id="clearFilters" class="secondary-button" type="button">Clear filters</button>
+      <div class="filter-note"><span></span><p>Dashboard data refreshes every three hours. You can refresh manually at any time.</p></div>
+    </div>
+  </aside>
+  <div class="filter-overlay" id="filterOverlay"></div>
+
+  <main class="page-shell" id="pageShell">
+    <section class="hero" id="overview">
+      <div><p class="eyebrow">Myanmar employment landscape</p><h1>Make your next career move with <em>real market evidence.</em></h1><p>Public vacancies transformed into practical market insights for job seekers, educators and employers.</p></div>
+      <div class="sync-card"><small>Last database update</small><strong id="lastSync">Loading…</strong><button id="refreshButton" type="button">Refresh dashboard</button></div>
+    </section>
+
+    <section class="metrics">
+      <article><span>Active jobs</span><strong id="jobsMetric">—</strong><small>Analyzed postings</small></article><article class="metric-highlight metric-companies"><span>Companies</span><strong id="companiesMetric">—</strong><small>Hiring organizations</small></article><article><span>Industries</span><strong id="industriesMetric">—</strong><small>Market sectors</small></article><article class="metric-highlight metric-locations"><span>Locations</span><strong id="citiesMetric">—</strong><small>Cities represented</small></article><article><span>Salary data</span><strong id="salaryMetric">—</strong><small>Disclosed records</small></article>
+    </section>
+
+    <section class="section-heading"><div><p class="eyebrow">Market overview</p><h2>Demand at a glance</h2></div><p>Compare hiring activity across industries, cities and requested skills.</p></section>
+    <section class="chart-grid">
+      <article class="panel panel-wide"><div class="panel-title"><h3>Jobs by industry</h3><span>Top 12</span></div><div class="chart-wrap tall"><canvas id="industryChart"></canvas></div></article>
+      <article class="panel locations-panel"><div class="panel-title"><h3>Top locations</h3><span>Exact counts · linear scale</span></div><div class="chart-wrap tall"><canvas id="locationChart"></canvas></div></article>
+      <article class="panel panel-full"><div class="panel-title"><h3>Most requested skills</h3></div><div class="chart-wrap tall"><canvas id="skillsChart"></canvas></div></article>
+    </section>
+
+    <section class="tool-section soft-sage" id="recommendations">
+      <div class="tool-intro"><span class="tool-number">01</span><div><p class="eyebrow">Job recommendation system</p><h2>Find roles that fit you</h2><p>Recommendations combine your target role, skills, preferred industry and city.</p></div></div>
+      <form class="tool-form" id="recommendationForm"><label>Target role<input id="recommendTarget" required placeholder="Marketing Executive"></label><label>Your skills<input id="recommendSkills" placeholder="English, Excel, communication"></label><label>Preferred city<input id="recommendCity" placeholder="Yangon"></label><button type="submit">Get recommendations</button></form>
+      <div class="result-grid" id="recommendationResults"><p class="empty-state">Add your preferences to calculate job matches.</p></div>
+    </section>
+
+    <section class="tool-section" id="skill-gap">
+      <div class="tool-intro"><span class="tool-number">02</span><div><p class="eyebrow">Skill gap analysis</p><h2>Know what to learn next</h2><p>Compare your current skills with the skills employers request for a target career.</p></div></div>
+      <form class="tool-form" id="skillGapForm"><label>Target career or industry<input id="gapTarget" required placeholder="Accounting"></label><label>Your current skills<input id="gapSkills" placeholder="Excel, bookkeeping, English"></label><button type="submit">Analyze skill gap</button></form>
+      <div id="skillGapResults" class="analysis-placeholder">Your coverage score and missing skills will appear here.</div>
+    </section>
+
+    <section class="tool-section soft-yellow" id="career-tools">
+      <div class="tool-intro"><span class="tool-number">03</span><div><p class="eyebrow">Career intelligence</p><h2>Predict demand and compare industries</h2><p>Use current vacancy volume and employer breadth to evaluate your options.</p></div></div>
+      <div class="career-grid">
+        <article class="mini-tool"><h3>Career demand predictor</h3><form id="demandForm"><input id="demandCareer" required placeholder="Human Resources"><button type="submit">Predict demand</button></form><div id="demandResults" class="mini-result">Choose a career to calculate its current demand signal.</div></article>
+        <article class="mini-tool"><h3>Career / industry comparison</h3><form id="comparisonForm"><input id="comparisonIndustries" required placeholder="Banking, Education / Training"><button type="submit">Compare</button></form><div id="comparisonResults" class="mini-result">Enter two to four industries separated by commas.</div></article>
+      </div>
+    </section>
+
+    <section class="section-heading"><div><p class="eyebrow">Workforce profile</p><h2>Career entry and progression</h2></div></section>
+    <section class="chart-grid three"><article class="panel"><div class="panel-title"><h3>Education</h3></div><div class="chart-wrap"><canvas id="educationChart"></canvas></div></article><article class="panel"><div class="panel-title"><h3>Experience</h3></div><div class="chart-wrap"><canvas id="experienceChart"></canvas></div></article><article class="panel"><div class="panel-title"><h3>Salary bands (MMK)</h3></div><div class="chart-wrap"><canvas id="salaryChart"></canvas></div></article><article class="panel panel-full"><div class="panel-title"><h3>Monthly posting trend</h3><span id="trendBasis">Updating as posting dates become available</span></div><div class="chart-wrap"><canvas id="trendChart"></canvas></div></article></section>
+
+    <section class="section-heading" id="jobs"><div><p class="eyebrow">Latest opportunities</p><h2>Recently collected jobs</h2></div></section>
+    <section class="panel table-panel"><div class="table-scroll"><table><thead><tr><th>Role</th><th>Company</th><th>Industry</th><th>City</th><th></th></tr></thead><tbody id="jobsTable"></tbody></table></div></section>
+  </main>
+
+  <footer><strong>Myanmar Job Pulse</strong><p>Current-market guidance based on successfully collected public postings.</p></footer><div id="toast" role="status" aria-live="polite"></div>
+</body></html>

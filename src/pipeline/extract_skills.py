@@ -1,8 +1,10 @@
 import json
 import re
+from pathlib import Path
 
 
-with open("config/skills.json", "r", encoding="utf-8") as file:
+SKILLS_PATH = Path(__file__).resolve().parents[2] / "config" / "skills.json"
+with SKILLS_PATH.open("r", encoding="utf-8") as file:
     skills_data = json.load(file)
 
 
@@ -31,7 +33,7 @@ def extract_skills(job):
 
     for skill in ALL_SKILLS:
 
-        pattern = r"\b" + re.escape(skill) + r"\b"
+        pattern = r"(?<!\w)" + re.escape(skill) + r"(?!\w)"
 
         if re.search(pattern, text):
 
